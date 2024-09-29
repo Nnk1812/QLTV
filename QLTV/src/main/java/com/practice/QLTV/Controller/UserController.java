@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,12 +39,20 @@ public class UserController {
     @GetMapping
     List<UserResponse> getallUser(@RequestParam(defaultValue = "0") int page,
                             @RequestParam(defaultValue = "5") int size){
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("Username : {}", authentication.getName());
+        authentication.getAuthorities().forEach(grantedAuthority -> log.info(grantedAuthority.getAuthority()));
         return userService.getalluser(page, size);
     }
     @GetMapping("/{id}")
     User getuser (@PathVariable int id){
         return userService.getuser(id);
     }
+    @GetMapping("/myinfo")
+    User getmyinfo(){
+        return userService.myinfo();
+    }
+
     @PutMapping("/{id}")
     UserResponse updateuser(@PathVariable int id, @RequestBody @Valid UserRequest request){
         return userService.updateuser(id,request);

@@ -41,4 +41,6 @@ public class UserRequest {
     private String CCCD; // Citizen ID
 
     private LocalDate doc = LocalDate.now();; // Document (optional)
+    @NotBlank(message = "roleName ID is mandatory")
+    private String roleName;
 }

@@ -2,9 +2,12 @@ package com.practice.QLTV.Service;
 
 import com.practice.QLTV.DTO.Request.UserRequest;
 import com.practice.QLTV.DTO.Response.UserResponse;
+import com.practice.QLTV.Entity.Role;
 import com.practice.QLTV.Entity.User;
 import com.practice.QLTV.Mapper.Mapper;
+import com.practice.QLTV.Repository.RoleRepository;
 import com.practice.QLTV.Repository.UserRepository;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Past;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -37,9 +42,16 @@ import java.util.stream.Collectors;
 public class UserService {
     private UserRepository userRepository;
     private Mapper userMapper;
+    private RoleRepository roleRepository;
 
     public User createUser(UserRequest request) {
+        if(userRepository.existsByUserName(request.getUserName()) ){
+            throw new RuntimeException("Username already exists");
+        }
+
         User user = userMapper.toUser(request);
+        Role role = roleRepository.findByRoleName(request.getRoleName()).orElseThrow(() -> new RuntimeException("Role Not Found"));
+        user.setUserRole(role);
         return userRepository.save(user);
     }
 
@@ -57,7 +69,8 @@ public class UserService {
                         user.getDob(),
                         user.getAddress(),
                         user.getCCCD(),
-                        user.getDoc()))
+                        user.getDoc(),
+                        user.getUserRole() != null ? user.getUserRole().getRoleName() : null ))
                 .collect(Collectors.toList());
     }
 
@@ -65,18 +78,20 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
     }
 
-    //    public User myinfo(){
-//        var context = SecurityContextHolder.getContext();
-//        String name = context.getAuthentication().getName();
-//        User user = userrepository.findByUsername(name).orElseThrow(() -> new RuntimeException("User Not Found"));
-//        return user;
-//    }
+    public User myinfo(){
+        var context = SecurityContextHolder.getContext();
+        String name = context.getAuthentication().getName();
+        User user = userRepository.findByUserName(name).orElseThrow(() -> new RuntimeException("User Not Found"));
+        return user;
+    }
     public UserResponse updateuser(int id, UserRequest request) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
         userMapper.updateUser(user, request);
+        Role role = roleRepository.findByRoleName(request.getRoleName()).orElseThrow(() -> new RuntimeException("Role Not Found"));
+        user.setUserRole(role);
         return userMapper.toUserResponse(userRepository.save(user));
     }
-
+    @PreAuthorize("hasRole('ROLE_Admin')")
     public String deleteuser(int id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
         userRepository.delete(user);

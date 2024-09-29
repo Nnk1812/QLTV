@@ -3,6 +3,17 @@ server:
   servlet:
     context-path: /QLTV
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs   # Đường dẫn đến tài liệu OpenAPI (API documentation)
+  swagger-ui:
+    path: /swagger-ui.html  # Đường dẫn đến giao diện Swagger UI
+    operations-sorter: alpha  # Sắp xếp các API theo thứ tự chữ cái
+    display-request-duration: true  # Hiển thị thời gian yêu cầu (request duration)
+    doc-expansion: none  # Thu gọn các API (collapse) khi mở Swagger UI
+    filter: true  # Kích hoạt bộ lọc để tìm kiếm nhanh các endpoint trong Swagger UI
+
+
 
 spring:
   datasource:
@@ -18,3 +29,17 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
+
+logging:
+  level:
+    root: info
+    org.springframework: info
+    com.yourcompany.yourproject: debug  # Tùy chỉnh mức độ log cho package của bạn
+  file:
+    path: ./logs/application.log  # Đường dẫn file log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+
+jwt :
+  signerKey: "TtE88A8rTVfSN0nPgLw3qIGiUtHeEOSVNkxeBusMllGWWg1N5jXoF+J2oRE8cwSS"
