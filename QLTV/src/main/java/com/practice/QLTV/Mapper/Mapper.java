@@ -1,10 +1,13 @@
 package com.practice.QLTV.Mapper;
 
+import com.practice.QLTV.DTO.Request.BookRequest;
 import com.practice.QLTV.DTO.Request.GenreRequest;
 import com.practice.QLTV.DTO.Request.RoleRequest;
 import com.practice.QLTV.DTO.Request.UserRequest;
+import com.practice.QLTV.DTO.Response.BookResponse;
 import com.practice.QLTV.DTO.Response.GenreResponse;
 import com.practice.QLTV.DTO.Response.UserResponse;
+import com.practice.QLTV.Entity.Book;
 import com.practice.QLTV.Entity.Genre;
 import com.practice.QLTV.Entity.Role;
 import com.practice.QLTV.Entity.User;
@@ -55,4 +58,9 @@ public interface Mapper {
     void updateGerne(@MappingTarget Genre genre , GenreRequest request);
 
     GenreResponse toGenreResponse(Genre genre);
+
+    Book toBook(BookRequest bookRequest);
+    void updateBook(@MappingTarget Book book , BookRequest request);
+
+    BookResponse toBookResponse(Book book);
 }

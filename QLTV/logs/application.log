@@ -174,3 +174,63 @@ java.lang.RuntimeException: Genre not found
 2024-09-30 09:40:30.582 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-09-30 09:40:30.596 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2024-09-30 09:40:30.655 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-09-30 10:44:38.713 [main] INFO  com.practice.QLTV.QltvApplication - Starting QltvApplication using Java 17.0.12 with PID 9284 (C:\Users\Admin\Documents\QLTV\QLTV\target\classes started by Admin in C:\Users\Admin\Documents\QLTV\QLTV)
+2024-09-30 10:44:38.716 [main] INFO  com.practice.QLTV.QltvApplication - No active profile set, falling back to 1 default profile: "default"
+2024-09-30 10:44:40.748 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-30 10:44:40.833 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 75 ms. Found 10 JPA repository interfaces.
+2024-09-30 10:44:41.646 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-09-30 10:44:41.673 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-30 10:44:41.681 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-30 10:44:41.682 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-09-30 10:44:41.784 [main] INFO  o.a.c.c.C.[.[localhost].[/QLTV] - Initializing Spring embedded WebApplicationContext
+2024-09-30 10:44:41.784 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3010 ms
+2024-09-30 10:44:41.986 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-30 10:44:42.176 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-09-30 10:44:42.221 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-09-30 10:44:42.746 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-30 10:44:42.794 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-09-30 10:44:43.485 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@d190639
+2024-09-30 10:44:43.489 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-09-30 10:44:44.985 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-30 10:44:45.434 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-30 10:44:46.184 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-30 10:44:47.257 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-30 10:44:47.287 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/QLTV'
+2024-09-30 10:44:47.299 [main] INFO  com.practice.QLTV.QltvApplication - Started QltvApplication in 9.194 seconds (process running for 11.308)
+2024-09-30 10:45:40.964 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/QLTV] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-30 10:45:40.964 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-09-30 10:45:40.967 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2024-09-30 10:45:41.957 [http-nio-8080-exec-10] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 574 ms
+2024-09-30 10:54:57.593 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-30 10:54:57.750 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-09-30 10:54:57.962 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-09-30 10:57:04.612 [main] INFO  com.practice.QLTV.QltvApplication - Starting QltvApplication using Java 17.0.12 with PID 9208 (C:\Users\Admin\Documents\QLTV\QLTV\target\classes started by Admin in C:\Users\Admin\Documents\QLTV\QLTV)
+2024-09-30 10:57:04.614 [main] INFO  com.practice.QLTV.QltvApplication - No active profile set, falling back to 1 default profile: "default"
+2024-09-30 10:57:05.663 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-09-30 10:57:05.743 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 10 JPA repository interfaces.
+2024-09-30 10:57:06.621 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-09-30 10:57:06.644 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-30 10:57:06.649 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-09-30 10:57:06.650 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-09-30 10:57:06.774 [main] INFO  o.a.c.c.C.[.[localhost].[/QLTV] - Initializing Spring embedded WebApplicationContext
+2024-09-30 10:57:06.774 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2120 ms
+2024-09-30 10:57:07.030 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-09-30 10:57:07.203 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-09-30 10:57:07.274 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-09-30 10:57:07.689 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-09-30 10:57:07.727 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-09-30 10:57:08.429 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6dd2e453
+2024-09-30 10:57:08.432 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-09-30 10:57:09.877 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-09-30 10:57:10.154 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-09-30 10:57:10.810 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-09-30 10:57:11.668 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-09-30 10:57:11.692 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/QLTV'
+2024-09-30 10:57:11.703 [main] INFO  com.practice.QLTV.QltvApplication - Started QltvApplication in 7.514 seconds (process running for 8.327)
+2024-09-30 10:57:17.676 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[localhost].[/QLTV] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-30 10:57:17.676 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-09-30 10:57:17.678 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-09-30 10:57:47.180 [http-nio-8080-exec-9] INFO  c.p.QLTV.Controller.UserController - Username : Admin
+2024-09-30 10:58:03.867 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-09-30 10:58:03.871 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-09-30 10:58:03.940 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
