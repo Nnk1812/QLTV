@@ -14,7 +14,5 @@ import java.time.LocalDate;
 public class GenreResponse {
     private int genreID;
     private String name;
-    private String address;
-    private String SDT;
-    private LocalDate dob;
+
 }

@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,15 +24,7 @@ public class Genre {
     @Column(nullable = false)
     private String name;
 
-    @Column
-    private String address;
-
-    @Column
-    private String SDT;
-
-    @Column
-    private LocalDate dob;
-
     @OneToMany(mappedBy = "genre")
+    @JsonIgnore
     private List<Book> books;
 }
