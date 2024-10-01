@@ -18,7 +18,7 @@ import java.util.Date;
 public class BorrowBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maMuon;
+    private Integer maMuon;
 
     @ManyToOne
     @JoinColumn(name = "bookID", nullable = false)

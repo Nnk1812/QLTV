@@ -19,7 +19,7 @@ import java.util.List;
 public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int genreID;
+    private Integer genreID;
 
     @Column(nullable = false)
     private String name;

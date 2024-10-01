@@ -23,7 +23,7 @@ public class BorrowBookRequest {
     private Integer userID;
 
     @NotNull(message = "Borrow date is required")
-    private LocalDate doMuon; // Borrow date
+    private LocalDate doMuon= LocalDate.now(); // Borrow date
 
     @NotBlank(message = "Phone number is required")
     private String SDT; // Phone number

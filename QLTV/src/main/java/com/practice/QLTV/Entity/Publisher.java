@@ -16,7 +16,7 @@ import java.util.List;
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int publisherID;
+    private Integer publisherID;
 
     @Column(nullable = false)
     private String name;

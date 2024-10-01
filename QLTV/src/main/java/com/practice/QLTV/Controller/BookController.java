@@ -21,25 +21,25 @@ public class BookController {
     @Autowired
     private BookService bookService;
     @PostMapping
-    APIResponse<Book> createbook(@RequestBody @Valid BookRequest request) {
-        APIResponse<Book> apiResponse = new APIResponse<>();
+    APIResponse<BookRequest> createbook(@RequestBody @Valid BookRequest request) {
+        APIResponse<BookRequest> apiResponse = new APIResponse<>();
         apiResponse.setData(bookService.createBook(request));
         return apiResponse;
     }
     @GetMapping
-    List<Book> getAllBooks() {
+    List<BookResponse> getAllBooks() {
         return bookService.getAllBooks();
     }
     @GetMapping("/{id}")
-    Book getBookById(@RequestParam int id) {
+    BookResponse getBookById(@PathVariable Integer id) {
         return bookService.getBookById(id);
     }
     @PutMapping("/{id}")
-    BookResponse updateBook(@RequestBody @Valid BookRequest request, @PathVariable int id) {
+    BookResponse updateBook(@RequestBody @Valid BookRequest request, @PathVariable Integer id) {
         return bookService.updateBook(request,id);
     }
-    @DeleteMapping
-    String deleteBookById(@RequestParam int id) {
+    @DeleteMapping("/{id}")
+    String deleteBookById(@PathVariable Integer id) {
         return bookService.deleteBookById(id);
     }
 

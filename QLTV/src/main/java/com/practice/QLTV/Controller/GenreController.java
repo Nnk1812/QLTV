@@ -31,15 +31,15 @@ public class GenreController {
         return genreService.getall();
     }
     @GetMapping("/{id}")
-    Genre getGenreById(@PathVariable int id) {
+    Genre getGenreById(@PathVariable Integer id) {
          return genreService.findbyid(id);
     }
     @PutMapping("/{id}")
-    GenreResponse updateGenre(@PathVariable int id, @RequestBody @Valid GenreRequest request) {
+    GenreResponse updateGenre(@PathVariable Integer id, @RequestBody @Valid GenreRequest request) {
         return genreService.updateGenre(id, request);
     }
     @DeleteMapping("/{id}")
-    String deleteGenreById(@PathVariable int id) {
+    String deleteGenreById(@PathVariable Integer id) {
         return genreService.deleteGenre(id);
     }
 }

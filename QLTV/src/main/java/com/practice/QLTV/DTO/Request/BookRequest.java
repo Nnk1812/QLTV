@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookRequest {
+    private Integer bookId;
     @NotBlank(message = "Name is required")
     private String name;
 
@@ -20,7 +21,7 @@ public class BookRequest {
     private Integer genreID;
 
     @NotNull(message = "Author ID is required")
-    private Integer authorID;
+    private Integer authorId;
 
     @NotNull(message = "Publisher ID is required")
     private Integer publisherID;

@@ -20,7 +20,7 @@ import java.util.Date;
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int authorID;
+    private Integer authorID;
 
     @Column(nullable = false)
     private String name;

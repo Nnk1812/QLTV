@@ -1,5 +1,6 @@
 package com.practice.QLTV.DTO.Response;
 
+import com.practice.QLTV.Entity.Publisher;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookResponse {
-    private int bookID;
+    private Integer bookID;
     private String name;
-    private String genreName;
-    private String authorName;
-    private String publisherName;
+    private GenreResponse genreID;
+    private AuthorResponse authorID;
+    private PublisherResponse publisherID;
     private int amount;
 }

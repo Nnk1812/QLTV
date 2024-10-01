@@ -16,6 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorRequest {
+    private Integer id;
+
     @NotBlank(message = "Name is required")
     private String name;
 

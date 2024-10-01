@@ -18,7 +18,7 @@ import java.util.Date;
 public class ReturnBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int maTra;
+    private Integer maTra;
 
     @ManyToOne
     @JoinColumn(name = "maMuon", nullable = false)

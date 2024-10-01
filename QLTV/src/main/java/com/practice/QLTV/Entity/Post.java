@@ -18,7 +18,7 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int postId;
+    private Integer postId;
 
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)

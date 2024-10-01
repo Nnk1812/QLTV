@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PublisherRequest {
+    private Integer PublisherId;
+
     @NotBlank(message = "Name is required")
     private String name;
 

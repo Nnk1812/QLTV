@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PublisherResponse {
-    private int publisherID;
+    private Integer publisherID;
     private String name;
     private String address;
     private String SDT;

@@ -29,19 +29,19 @@ public class GenreService {
         return genreRepository.findAll();
     }
 
-    public Genre findbyid(int id){
+    public Genre findbyid(Integer id){
         return genreRepository.findById(id).orElseThrow(()->new RuntimeException("Genre not found"));
     }
 
-    public GenreResponse updateGenre(int id, GenreRequest request){
+    public GenreResponse updateGenre(Integer id, GenreRequest request){
 
         Genre genre = genreRepository.findByGenreID(id).orElseThrow(()->new RuntimeException("Genre not found"));
         mapper.updateGerne(genre,request);
         return mapper.toGenreResponse(genreRepository.save(genre));
     }
 
-    public  String deleteGenre(int id){
-        Genre genre = genreRepository.findById(id).orElseThrow(()->new RuntimeException("Genre not found"));
+    public  String deleteGenre(Integer id){
+        Genre genre = genreRepository.findByGenreID(id).orElseThrow(()->new RuntimeException("Genre not found"));
         genreRepository.delete(genre);
         return "Genre deleted";
     }

@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthorResponse {
-    private int authorID;
+    private Integer authorID;
     private String name;
     private String SDT;
     private String email;
