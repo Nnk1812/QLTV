@@ -25,7 +25,6 @@ public class BorrowBookService {
     private BorrowRepository borrowRepository;
     private BookRepository bookRepository;
     private UserRepository userRepository;
-    Mapper mapper;
     BorrowBookResponse toResponse(BorrowBook borrowBook) {
         BorrowBookResponse response = new BorrowBookResponse();
         response.setMaMuon(borrowBook.getMaMuon());
@@ -54,7 +53,7 @@ public class BorrowBookService {
         publisherDTO.setAddress(borrowBook.getBook().getPublisher().getAddress());
         publisherDTO.setSDT(borrowBook.getBook().getPublisher().getSDT());
         book.setPublisherID(publisherDTO);
-        response.setBookID(book);
+        response.setBookId(book);
 
         UserResponse user = new UserResponse();
         user.setUserId(borrowBook.getUser().getUserId());
@@ -73,53 +72,68 @@ public class BorrowBookService {
         role.setDescription(borrowBook.getUser().getUserRole().getDescription());
         user.setRoleName(role);  // Set the UserRoleResponse object to UserResponse
 
-        response.setUserID(user);
-
-
-        response.setUserID(user);
+        response.setUserId(user);
         response.setDoMuon(borrowBook.getDoMuon());
         response.setSDT(borrowBook.getSDT());
         response.setCCCD(borrowBook.getCCCD());
         response.setNote(borrowBook.getNote());
         return response;
     }
-    private BorrowBook toBorrowBook(BorrowBookRequest request) {
-        BorrowBook borrowBook = new BorrowBook();
-
-        // Thiết lập các thuộc tính cơ bản
-        borrowBook.setMaMuon(request.getBorrowID());
+    private void updateBorrowBook(BorrowBook borrowBook, BorrowBookRequest request) {
+        // Cập nhật thông tin mượn sách
         borrowBook.setDoMuon(request.getDoMuon());
         borrowBook.setSDT(request.getSDT());
         borrowBook.setCCCD(request.getCCCD());
         borrowBook.setNote(request.getNote());
 
-        // Kiểm tra tồn tại của Book và User trước khi tạo BorrowBook
+        // Tìm kiếm và cập nhật đối tượng Book nếu có sự thay đổi
         Book book = bookRepository.findById(request.getBookID())
                 .orElseThrow(() -> new RuntimeException("Book not found"));
         borrowBook.setBook(book);
+
+        // Tìm kiếm và cập nhật đối tượng User nếu có sự thay đổi
         User user = userRepository.findById(request.getUserID())
                 .orElseThrow(() -> new RuntimeException("User not found"));
         borrowBook.setUser(user);
+    }
 
+    public BorrowBook toBookBorrow(BorrowBookRequest request) {
+        BorrowBook borrowBook = new BorrowBook();
+
+        Book book = bookRepository.findById(request.getBookID()).orElseThrow(
+                () -> new RuntimeException("Book not found")
+        );
+        borrowBook.setBook(book);
+
+        User user = userRepository.findById(request.getUserID()).orElseThrow(
+                () -> new RuntimeException("User not found")
+        );
+        borrowBook.setUser(user);
+
+        // Gán giá trị cho các trường còn lại
+        borrowBook.setDoMuon(request.getDoMuon());
+        borrowBook.setSDT(request.getSDT());
+        borrowBook.setCCCD(request.getCCCD());
+        borrowBook.setNote(request.getNote());
 
         return borrowBook;
     }
 
+
     public BorrowBook createborrow(BorrowBookRequest request) {
-        BorrowBook book = toBorrowBook(request);
+        BorrowBook book = toBookBorrow(request);
         return borrowRepository.save(book);
     }
     public List<BorrowBook> getall() {
         return borrowRepository.findAll();
     }
     public BorrowBook findById(int id) {
-        return (borrowRepository.findByMaMuon(id).orElseThrow(()->new RuntimeException("BorrowBook not found")));
+        return borrowRepository.findByMaMuon(id).orElse(null);
     }
-    public BorrowBookResponse update(BorrowBookRequest request,int id) {
+    public BorrowBook update(BorrowBookRequest request,int id) {
         BorrowBook book = borrowRepository.findByMaMuon(id).orElseThrow(()->new RuntimeException("Book not found"));
-        mapper.updateBorrowBook(book,request);
-
-        return mapper.toBorrowBookResponse(book);
+        updateBorrowBook(book,request);
+        return (borrowRepository.save(book));
     }
     public String delete(int id) {
         BorrowBook book = borrowRepository.findByMaMuon(id).orElseThrow(()->new RuntimeException("Book not found"));

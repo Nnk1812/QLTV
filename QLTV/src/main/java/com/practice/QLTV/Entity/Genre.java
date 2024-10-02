@@ -25,5 +25,6 @@ public class Genre {
     private String name;
 
     @OneToMany(mappedBy = "genre")
+    @JsonIgnore
     private List<Book> books;
 }

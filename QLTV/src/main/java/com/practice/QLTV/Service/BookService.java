@@ -34,7 +34,7 @@ public class BookService {
     PublisherRepository publisherRepository;
     AuthorRepository authorRepository;
 
-    BookResponse toBookDTO(Book book) {
+     BookResponse toBookDTO(Book book) {
         BookResponse bookDTO = new BookResponse();
         bookDTO.setBookID(book.getBookID());
         bookDTO.setName(book.getName());
@@ -62,12 +62,12 @@ public class BookService {
         bookDTO.setAmount(book.getAmount());
         return bookDTO;
     }
-    private List<BookResponse> toBookDTOList(List<Book> books) {
+     List<BookResponse> toBookDTOList(List<Book> books) {
         return books.stream()
-                .map(this::toBookDTO)
-                .collect(Collectors.toList());
+                .map(this::toBookDTO) // Sử dụng phương thức toBookDTO để chuyển đổi từng Book thành BookResponse
+                .collect(Collectors.toList()); // Thu thập kết quả vào một danh sách
     }
-    Book toBook(BookRequest request) {
+     Book toBook(BookRequest request) {
         Book book = new Book();
 
         book.setName(request.getName());
@@ -105,10 +105,10 @@ public class BookService {
 
         book.setAmount(request.getAmount());
     }
-    public Book createBook(BookRequest request) {
+    public BookRequest createBook(BookRequest request) {
         Book book = toBook(request);
         bookRepository.save(book);
-        return toBook(request);
+        return request;
     }
     public BookResponse updateBook(BookRequest request, Integer id) {
         Book book = bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found"));
@@ -118,8 +118,8 @@ public class BookService {
     public List<Book> getAllBooks() {
         return (bookRepository.findAll());
     }
-    public Book getBookById(Integer id) {
-        return (bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found")));
+    public BookResponse getBookById(Integer id) {
+        return toBookDTO(bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found")));
     }
     public String deleteBookById(Integer id) {
         Book book = bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found"));

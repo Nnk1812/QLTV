@@ -35,7 +35,7 @@ public class BorrowBookController {
         return borrowBookService.findById(id);
     }
     @PutMapping("/{id}")
-    BorrowBookResponse updateBorrowBook (@PathVariable int id, @RequestBody @Valid BorrowBookRequest request) {
+    BorrowBook updateBorrowBook (@PathVariable int id, @RequestBody @Valid BorrowBookRequest request) {
         return borrowBookService.update(request,id);
     }
     @DeleteMapping("/{id}")

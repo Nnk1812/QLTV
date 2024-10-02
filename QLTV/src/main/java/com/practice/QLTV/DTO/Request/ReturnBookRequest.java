@@ -7,17 +7,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReturnBookRequest {
-    private Integer returnbookID;
     @NotNull(message = "Borrow ID is required")
+    private Integer maTRA;
+
+    @NotNull(message = ("ma muon is required"))
     private Integer borrowID;
 
-    @NotNull(message = "userid is required")
+    @NotNull(message = ("userid is required"))
     private Integer userId;
 
     @NotNull(message = "Return date is required")

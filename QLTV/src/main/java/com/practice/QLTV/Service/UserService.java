@@ -8,8 +8,6 @@ import com.practice.QLTV.Entity.User;
 import com.practice.QLTV.Mapper.Mapper;
 import com.practice.QLTV.Repository.RoleRepository;
 import com.practice.QLTV.Repository.UserRepository;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Past;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -44,25 +42,22 @@ public class UserService {
     private UserRepository userRepository;
     private Mapper userMapper;
     private RoleRepository roleRepository;
-
-    private UserResponse toResponse(User user) {
-        UserResponse userResponse = new UserResponse();
-        userResponse.setUserId(user.getUserId());
-        userResponse.setUserName(user.getUserName());
-        userResponse.setPassWord(user.getPassWord());
-        userResponse.setName(user.getName());
-        userResponse.setSDT(user.getSDT());
-        userResponse.setDob(user.getDob());
-        userResponse.setAddress(user.getAddress());
-        userResponse.setCCCD(user.getCCCD());
-        userResponse.setDoc(user.getDoc());
-
+    UserResponse toResponse(User user) {
+        UserResponse response = new UserResponse();
+        response.setUserId(user.getUserId());
+        response.setUserName(user.getUserName());
+        response.setPassWord(user.getPassWord());
+        response.setName(user.getName());
+        response.setSDT(user.getSDT());
+        response.setDob(user.getDob());
+        response.setAddress(user.getAddress());
+        response.setCCCD(user.getCCCD());
+        response.setDoc(user.getDoc());
         RoleResponse role = new RoleResponse();
         role.setRoleName(user.getUserRole().getRoleName());
         role.setDescription(user.getUserRole().getDescription());
-        userResponse.setRoleName(role);  // Set the UserRoleResponse object to UserResponse
-
-        return userResponse;
+        response.setRoleName(role);
+        return response;
     }
 
     public User createUser(UserRequest request) {
@@ -81,34 +76,27 @@ public class UserService {
         Page<User> userPage = userRepository.findAll(pageable);
 
         return userPage.getContent().stream()
-                .map(user -> {
-                    // Mapping UserRole to RoleResponse
-                    RoleResponse roleResponse = null;
-                    if (user.getUserRole() != null) {
-                        roleResponse = new RoleResponse();
-                        roleResponse.setRoleName(user.getUserRole().getRoleName());
-                        roleResponse.setDescription(user.getUserRole().getDescription());  // Assuming you have more fields in RoleResponse
-                    }
-
-                    // Create UserResponse with RoleResponse instead of roleName
-                    return new UserResponse(
-                            user.getUserId(),
-                            user.getUserName(),
-                            user.getPassWord(),
-                            user.getName(),
-                            user.getSDT(),
-                            user.getDob(),
-                            user.getAddress(),
-                            user.getCCCD(),
-                            user.getDoc(),
-                            roleResponse  // Set RoleResponse here
-                    );
-                })
+                .map(user -> new UserResponse(
+                        user.getUserId(),
+                        user.getUserName(),
+                        user.getPassWord(),
+                        user.getName(),
+                        user.getSDT(),
+                        user.getDob(),
+                        user.getAddress(),
+                        user.getCCCD(),
+                        user.getDoc(),
+                        user.getUserRole() != null ?
+                                new RoleResponse(
+                                        user.getUserRole().getRoleName(),
+                                        user.getUserRole().getDescription() // Lấy mô tả từ đối tượng Role
+                                ) : null))
                 .collect(Collectors.toList());
     }
 
-    public UserResponse getuser(int id) {
-        return toResponse(userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found")));
+
+    public User getuser(int id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
     }
 
     public User myinfo(){

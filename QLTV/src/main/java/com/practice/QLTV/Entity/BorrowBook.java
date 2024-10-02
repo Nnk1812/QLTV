@@ -22,12 +22,10 @@ public class BorrowBook {
     private Integer maMuon;
 
     @ManyToOne
-
     @JoinColumn(name = "bookID", nullable = false)
     private Book book;
 
     @ManyToOne
-
     @JoinColumn(name = "userID", nullable = false)
     private User user;
 

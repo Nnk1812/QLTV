@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,7 @@ public class ReturnBook {
     private BorrowBook borrow;
 
     @ManyToOne
-    @JoinColumn(name= "userid", nullable = false)
+    @JoinColumn(name = "userid", nullable = false)
     private User user;
 
     @Column(nullable = false)

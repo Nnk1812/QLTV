@@ -16,8 +16,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BorrowBookRequest {
-    private Integer borrowID;
-
     @NotNull(message = "Book ID is required")
     private Integer bookID;
 
