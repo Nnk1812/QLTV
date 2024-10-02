@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,10 +22,12 @@ public class Comment {
     private Integer idCmt;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idPost", nullable = false)
     private Post post;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
 

@@ -1,6 +1,5 @@
 package com.practice.QLTV.DTO.Response;
 
-import com.practice.QLTV.Entity.Publisher;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class Post {
     private Integer postId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "userID", nullable = false)
     private User user;
 

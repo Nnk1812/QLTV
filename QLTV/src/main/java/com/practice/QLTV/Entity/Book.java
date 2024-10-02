@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,14 +24,17 @@ public class Book {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "genreID", nullable = false)
     private Genre genre;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "authorID", nullable = false)
     private Author author;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "publisherID", nullable = false)
     private Publisher publisher;
 

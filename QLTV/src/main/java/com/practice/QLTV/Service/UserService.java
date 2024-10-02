@@ -1,6 +1,7 @@
 package com.practice.QLTV.Service;
 
 import com.practice.QLTV.DTO.Request.UserRequest;
+import com.practice.QLTV.DTO.Response.RoleResponse;
 import com.practice.QLTV.DTO.Response.UserResponse;
 import com.practice.QLTV.Entity.Role;
 import com.practice.QLTV.Entity.User;
@@ -44,6 +45,26 @@ public class UserService {
     private Mapper userMapper;
     private RoleRepository roleRepository;
 
+    private UserResponse toResponse(User user) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setUserId(user.getUserId());
+        userResponse.setUserName(user.getUserName());
+        userResponse.setPassWord(user.getPassWord());
+        userResponse.setName(user.getName());
+        userResponse.setSDT(user.getSDT());
+        userResponse.setDob(user.getDob());
+        userResponse.setAddress(user.getAddress());
+        userResponse.setCCCD(user.getCCCD());
+        userResponse.setDoc(user.getDoc());
+
+        RoleResponse role = new RoleResponse();
+        role.setRoleName(user.getUserRole().getRoleName());
+        role.setDescription(user.getUserRole().getDescription());
+        userResponse.setRoleName(role);  // Set the UserRoleResponse object to UserResponse
+
+        return userResponse;
+    }
+
     public User createUser(UserRequest request) {
         if(userRepository.existsByUserName(request.getUserName()) ){
             throw new RuntimeException("Username already exists");
@@ -60,22 +81,34 @@ public class UserService {
         Page<User> userPage = userRepository.findAll(pageable);
 
         return userPage.getContent().stream()
-                .map(user -> new UserResponse(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getPassWord(),
-                        user.getName(),
-                        user.getSDT(),
-                        user.getDob(),
-                        user.getAddress(),
-                        user.getCCCD(),
-                        user.getDoc(),
-                        user.getUserRole() != null ? user.getUserRole().getRoleName() : null ))
+                .map(user -> {
+                    // Mapping UserRole to RoleResponse
+                    RoleResponse roleResponse = null;
+                    if (user.getUserRole() != null) {
+                        roleResponse = new RoleResponse();
+                        roleResponse.setRoleName(user.getUserRole().getRoleName());
+                        roleResponse.setDescription(user.getUserRole().getDescription());  // Assuming you have more fields in RoleResponse
+                    }
+
+                    // Create UserResponse with RoleResponse instead of roleName
+                    return new UserResponse(
+                            user.getUserId(),
+                            user.getUserName(),
+                            user.getPassWord(),
+                            user.getName(),
+                            user.getSDT(),
+                            user.getDob(),
+                            user.getAddress(),
+                            user.getCCCD(),
+                            user.getDoc(),
+                            roleResponse  // Set RoleResponse here
+                    );
+                })
                 .collect(Collectors.toList());
     }
 
-    public User getuser(int id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
+    public UserResponse getuser(int id) {
+        return toResponse(userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found")));
     }
 
     public User myinfo(){
@@ -89,7 +122,7 @@ public class UserService {
         userMapper.updateUser(user, request);
         Role role = roleRepository.findByRoleName(request.getRoleName()).orElseThrow(() -> new RuntimeException("Role Not Found"));
         user.setUserRole(role);
-        return userMapper.toUserResponse(userRepository.save(user));
+        return toResponse(userRepository.save(user));
     }
     @PreAuthorize("hasRole('ROLE_Admin')")
     public String deleteuser(int id) {

@@ -24,6 +24,10 @@ public class ReturnBook {
     @JoinColumn(name = "maMuon", nullable = false)
     private BorrowBook borrow;
 
+    @ManyToOne
+    @JoinColumn(name= "userid", nullable = false)
+    private User user;
+
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private LocalDate doTra; // Date returned

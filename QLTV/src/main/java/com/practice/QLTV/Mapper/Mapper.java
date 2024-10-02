@@ -14,28 +14,7 @@ import java.util.List;
 @org.mapstruct.Mapper(componentModel = "spring")
 public interface Mapper {
 
-//    @Mapping(target = "role", source = "name")
     User toUser(UserRequest userRequest);
-
-    public default UserResponse toUserResponse(User user) {
-        if (user == null) {
-            return null; // Kiểm tra null để tránh NullPointerException
-        }
-
-        return UserResponse.builder()
-                .userId(user.getUserId())
-                .userName(user.getUserName())
-                .passWord(user.getPassWord())
-                .name(user.getName())
-                .SDT(user.getSDT())
-                .dob(user.getDob())
-                .address(user.getAddress())
-                .CCCD(user.getCCCD())
-                .doc(user.getDoc())
-                .roleName(user.getUserRole() != null ? user.getUserRole().getRoleName() : null) // Lấy tên vai trò từ Role
-                .build();
-    }
-
 
     void updateUser(@MappingTarget User user , UserRequest request);
 

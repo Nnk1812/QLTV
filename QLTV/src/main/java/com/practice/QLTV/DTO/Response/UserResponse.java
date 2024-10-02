@@ -30,6 +30,6 @@ public class UserResponse {
 
     private LocalDate doc ; // Document (optional)
 
-    private String roleName;
+    private RoleResponse roleName;
     
 }

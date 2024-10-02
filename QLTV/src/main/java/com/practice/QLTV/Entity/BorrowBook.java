@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,10 +22,12 @@ public class BorrowBook {
     private Integer maMuon;
 
     @ManyToOne
+
     @JoinColumn(name = "bookID", nullable = false)
     private Book book;
 
     @ManyToOne
+
     @JoinColumn(name = "userID", nullable = false)
     private User user;
 

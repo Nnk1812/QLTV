@@ -45,7 +45,7 @@ public class UserController {
         return userService.getalluser(page, size);
     }
     @GetMapping("/{id}")
-    User getuser (@PathVariable int id){
+    UserResponse getuser (@PathVariable int id){
         return userService.getuser(id);
     }
     @GetMapping("/myinfo")

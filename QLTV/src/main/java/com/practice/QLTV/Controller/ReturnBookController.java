@@ -2,8 +2,10 @@ package com.practice.QLTV.Controller;
 
 import com.practice.QLTV.DTO.Request.ReturnBookRequest;
 import com.practice.QLTV.DTO.Response.APIResponse;
+import com.practice.QLTV.DTO.Response.ReturnBookResponse;
 import com.practice.QLTV.Entity.ReturnBook;
 import com.practice.QLTV.Service.ReturnBookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class ReturnBookController {
     private ReturnBookService returnBookService;
 
     @PostMapping
-    APIResponse<ReturnBook> createReturnBook(ReturnBookRequest request) {
+    APIResponse<ReturnBook> createReturnBook(@RequestBody @Valid ReturnBookRequest request) {
         APIResponse<ReturnBook> apiResponse = new APIResponse<>();
         apiResponse.setData(returnBookService.createReturnBook(request));
         return apiResponse;
@@ -37,7 +39,7 @@ public class ReturnBookController {
     }
 
     @PutMapping("/{id}")
-    ReturnBook updateReturnBook(@PathVariable int id, ReturnBookRequest request) {
+    ReturnBookResponse updateReturnBook(@PathVariable int id,@RequestBody ReturnBookRequest request) {
         return returnBookService.updateReturnBook(id, request);
     }
 
