@@ -31,11 +31,11 @@ public class BookController {
         return bookService.getAllBooks();
     }
     @GetMapping("/{id}")
-    BookResponse getBookById(@PathVariable Integer id) {
+    Book getBookById(@PathVariable Integer id) {
         return bookService.getBookById(id);
     }
     @PutMapping("/{id}")
-    BookResponse updateBook(@RequestBody @Valid BookRequest request, @PathVariable Integer id) {
+    Book updateBook(@RequestBody @Valid BookRequest request, @PathVariable Integer id) {
         return bookService.updateBook(request,id);
     }
     @DeleteMapping("/{id}")

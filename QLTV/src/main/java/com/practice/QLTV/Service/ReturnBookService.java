@@ -28,66 +28,6 @@ public class ReturnBookService {
     private Mapper mapper;
     private BorrowRepository borrowRepository;
     private UserRepository userRepository;
-    ReturnBookResponse toReturn(ReturnBook returnBook) {
-        ReturnBookResponse response = new ReturnBookResponse();
-
-        // Set maTra (mã trả)
-        response.setMaTra(returnBook.getMaTra());
-
-        // Set thông tin sách
-        BorrowBook borrowBook = returnBook.getBorrow();
-        BookResponse bookResponse = new BookResponse();
-        bookResponse.setBookID(borrowBook.getBook().getBookID());
-        bookResponse.setName(borrowBook.getBook().getName());
-        bookResponse.setAmount(borrowBook.getBook().getAmount());
-
-        GenreResponse genreDTO = new GenreResponse();
-        genreDTO.setGenreID(borrowBook.getBook().getGenre().getGenreID());
-        genreDTO.setName(borrowBook.getBook().getGenre().getName());
-        bookResponse.setGenreID(genreDTO);
-
-        AuthorResponse authorDTO = new AuthorResponse();
-        authorDTO.setAuthorID(borrowBook.getBook().getAuthor().getAuthorID());
-        authorDTO.setName(borrowBook.getBook().getAuthor().getName());
-        authorDTO.setEmail(borrowBook.getBook().getAuthor().getEmail());
-        authorDTO.setDob(borrowBook.getBook().getAuthor().getDob());
-        authorDTO.setSDT(borrowBook.getBook().getAuthor().getSDT());
-        bookResponse.setAuthorID(authorDTO);
-
-        PublisherResponse publisherDTO = new PublisherResponse();
-        publisherDTO.setPublisherID(borrowBook.getBook().getPublisher().getPublisherID());
-        publisherDTO.setName(borrowBook.getBook().getPublisher().getName());
-        publisherDTO.setAddress(borrowBook.getBook().getPublisher().getAddress());
-        publisherDTO.setSDT(borrowBook.getBook().getPublisher().getSDT());
-        bookResponse.setPublisherID(publisherDTO);
-
-        response.setMaBook(bookResponse);
-
-        // Set thông tin người dùng
-        UserResponse userResponse = new UserResponse();
-        userResponse.setUserId(returnBook.getUser().getUserId());
-        userResponse.setName(returnBook.getUser().getName());
-        userResponse.setUserName(returnBook.getUser().getUserName());
-        userResponse.setPassWord(returnBook.getUser().getPassWord());
-        userResponse.setSDT(returnBook.getUser().getSDT());
-        userResponse.setDob(returnBook.getUser().getDob());
-        userResponse.setAddress(returnBook.getUser().getAddress());
-        userResponse.setCCCD(returnBook.getUser().getCCCD());
-        userResponse.setDoc(returnBook.getUser().getDoc());
-
-        RoleResponse roleResponse = new RoleResponse();
-        roleResponse.setRoleName(returnBook.getUser().getUserRole().getRoleName());
-        roleResponse.setDescription(returnBook.getUser().getUserRole().getDescription());
-        userResponse.setRoleName(roleResponse);
-
-        response.setUserId(userResponse);
-
-        // Set ngày trả và ghi chú
-        response.setDoTra(returnBook.getDoTra());
-        response.setNote(returnBook.getNote());
-
-        return response;
-    }
     ReturnBook toReturn(ReturnBookRequest request) {
         ReturnBook returnBook = new ReturnBook();
         returnBook.setMaTra(request.getMaTRA());

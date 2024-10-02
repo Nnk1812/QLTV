@@ -25,60 +25,6 @@ public class BorrowBookService {
     private BorrowRepository borrowRepository;
     private BookRepository bookRepository;
     private UserRepository userRepository;
-    BorrowBookResponse toResponse(BorrowBook borrowBook) {
-        BorrowBookResponse response = new BorrowBookResponse();
-        response.setMaMuon(borrowBook.getMaMuon());
-
-        BookResponse book = new BookResponse();
-        book.setBookID(borrowBook.getBook().getBookID());
-        book.setName(borrowBook.getBook().getName());
-        book.setAmount(borrowBook.getBook().getAmount());
-
-        GenreResponse genreDTO = new GenreResponse();
-        genreDTO.setGenreID(borrowBook.getBook().getGenre().getGenreID());
-        genreDTO.setName(borrowBook.getBook().getGenre().getName());
-        book.setGenreID(genreDTO);
-
-        AuthorResponse authorDTO = new AuthorResponse();
-        authorDTO.setAuthorID(borrowBook.getBook().getAuthor().getAuthorID());
-        authorDTO.setName(borrowBook.getBook().getAuthor().getName());
-        authorDTO.setEmail(borrowBook.getBook().getAuthor().getEmail());
-        authorDTO.setDob(borrowBook.getBook().getAuthor().getDob());
-        authorDTO.setSDT(borrowBook.getBook().getAuthor().getSDT());
-        book.setAuthorID(authorDTO);
-
-        PublisherResponse publisherDTO = new PublisherResponse();
-        publisherDTO.setPublisherID(borrowBook.getBook().getPublisher().getPublisherID());
-        publisherDTO.setName(borrowBook.getBook().getPublisher().getName());
-        publisherDTO.setAddress(borrowBook.getBook().getPublisher().getAddress());
-        publisherDTO.setSDT(borrowBook.getBook().getPublisher().getSDT());
-        book.setPublisherID(publisherDTO);
-        response.setBookId(book);
-
-        UserResponse user = new UserResponse();
-        user.setUserId(borrowBook.getUser().getUserId());
-        user.setName(borrowBook.getUser().getName());
-        user.setUserName(borrowBook.getUser().getUserName());
-        user.setPassWord(borrowBook.getUser().getPassWord());
-        user.setSDT(borrowBook.getUser().getSDT());
-        user.setDob(borrowBook.getUser().getDob());
-        user.setAddress(borrowBook.getUser().getAddress());
-        user.setCCCD(borrowBook.getUser().getCCCD());
-        user.setDoc(borrowBook.getUser().getDoc());
-
-
-        RoleResponse role = new RoleResponse();
-        role.setRoleName(borrowBook.getUser().getUserRole().getRoleName());
-        role.setDescription(borrowBook.getUser().getUserRole().getDescription());
-        user.setRoleName(role);  // Set the UserRoleResponse object to UserResponse
-
-        response.setUserId(user);
-        response.setDoMuon(borrowBook.getDoMuon());
-        response.setSDT(borrowBook.getSDT());
-        response.setCCCD(borrowBook.getCCCD());
-        response.setNote(borrowBook.getNote());
-        return response;
-    }
     private void updateBorrowBook(BorrowBook borrowBook, BorrowBookRequest request) {
         // Cập nhật thông tin mượn sách
         borrowBook.setDoMuon(request.getDoMuon());

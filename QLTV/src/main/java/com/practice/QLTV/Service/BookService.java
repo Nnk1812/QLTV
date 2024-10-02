@@ -34,39 +34,6 @@ public class BookService {
     PublisherRepository publisherRepository;
     AuthorRepository authorRepository;
 
-     BookResponse toBookDTO(Book book) {
-        BookResponse bookDTO = new BookResponse();
-        bookDTO.setBookID(book.getBookID());
-        bookDTO.setName(book.getName());
-
-        GenreResponse genreDTO = new GenreResponse();
-        genreDTO.setGenreID(book.getGenre().getGenreID());
-        genreDTO.setName(book.getGenre().getName());
-        bookDTO.setGenreID(genreDTO);
-
-        AuthorResponse authorDTO = new AuthorResponse();
-        authorDTO.setAuthorID(book.getAuthor().getAuthorID());
-        authorDTO.setName(book.getAuthor().getName());
-        authorDTO.setEmail(book.getAuthor().getEmail());
-        authorDTO.setDob(book.getAuthor().getDob());
-        authorDTO.setSDT(book.getAuthor().getSDT());
-        bookDTO.setAuthorID(authorDTO);
-
-        PublisherResponse publisherDTO = new PublisherResponse();
-        publisherDTO.setPublisherID(book.getPublisher().getPublisherID());
-        publisherDTO.setName(book.getPublisher().getName());
-        publisherDTO.setAddress(book.getPublisher().getAddress());
-        publisherDTO.setSDT(book.getPublisher().getSDT());
-        bookDTO.setPublisherID(publisherDTO);
-
-        bookDTO.setAmount(book.getAmount());
-        return bookDTO;
-    }
-     List<BookResponse> toBookDTOList(List<Book> books) {
-        return books.stream()
-                .map(this::toBookDTO) // Sử dụng phương thức toBookDTO để chuyển đổi từng Book thành BookResponse
-                .collect(Collectors.toList()); // Thu thập kết quả vào một danh sách
-    }
      Book toBook(BookRequest request) {
         Book book = new Book();
 
@@ -110,16 +77,16 @@ public class BookService {
         bookRepository.save(book);
         return request;
     }
-    public BookResponse updateBook(BookRequest request, Integer id) {
+    public Book updateBook(BookRequest request, Integer id) {
         Book book = bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found"));
         updateBook(book,request);
-        return toBookDTO(bookRepository.save(book));
+        return (bookRepository.save(book));
     }
     public List<Book> getAllBooks() {
         return (bookRepository.findAll());
     }
-    public BookResponse getBookById(Integer id) {
-        return toBookDTO(bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found")));
+    public Book getBookById(Integer id) {
+        return (bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found")));
     }
     public String deleteBookById(Integer id) {
         Book book = bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found"));
