@@ -1,20 +1,20 @@
 package com.practice.QLTV.Service;
 
 import com.practice.QLTV.DTO.Request.BorrowBookRequest;
-import com.practice.QLTV.DTO.Response.*;
 import com.practice.QLTV.Entity.Book;
 import com.practice.QLTV.Entity.BorrowBook;
 import com.practice.QLTV.Entity.User;
-import com.practice.QLTV.Mapper.Mapper;
 import com.practice.QLTV.Repository.BookRepository;
 import com.practice.QLTV.Repository.BorrowRepository;
 import com.practice.QLTV.Repository.UserRepository;
+import com.practice.QLTV.Repository.projection.BorrowBookView;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -86,4 +86,10 @@ public class BorrowBookService {
         borrowRepository.delete(book);
         return "Book deleted";
     }
+
+    public List<BorrowBookView> countborrow(LocalDate startdate,LocalDate enddate)
+    {
+        return borrowRepository.countBorrowBookByBookId(startdate,enddate);
+    }
+
 }

@@ -5,12 +5,14 @@ import com.practice.QLTV.DTO.Response.GenreResponse;
 import com.practice.QLTV.Entity.Genre;
 import com.practice.QLTV.Mapper.Mapper;
 import com.practice.QLTV.Repository.GenreRepository;
+import com.practice.QLTV.Repository.projection.GenreView;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -44,5 +46,8 @@ public class GenreService {
         Genre genre = genreRepository.findByGenreID(id).orElseThrow(()->new RuntimeException("Genre not found"));
         genreRepository.delete(genre);
         return "Genre deleted";
+    }
+    public List<GenreView> countgenre(LocalDate startDate, LocalDate endDate){
+        return genreRepository.countGenreViewByGenreID(startDate,endDate);
     }
 }

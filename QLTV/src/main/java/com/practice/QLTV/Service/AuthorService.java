@@ -4,6 +4,7 @@ import com.practice.QLTV.DTO.Request.AuthorRequest;
 import com.practice.QLTV.Entity.Author;
 import com.practice.QLTV.Mapper.Mapper;
 import com.practice.QLTV.Repository.AuthorRepository;
+import com.practice.QLTV.Repository.projection.AuthorOverView;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,5 +26,8 @@ public class AuthorService {
     }
     public List<Author> getall() {
         return authorRepository.findAll();
+    }
+    public AuthorOverView getauthor(int id) {
+        return authorRepository.findAuthorOverviewByAuthorID(id);
     }
 }

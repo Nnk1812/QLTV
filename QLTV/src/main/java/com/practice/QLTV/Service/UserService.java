@@ -8,6 +8,7 @@ import com.practice.QLTV.Entity.User;
 import com.practice.QLTV.Mapper.Mapper;
 import com.practice.QLTV.Repository.RoleRepository;
 import com.practice.QLTV.Repository.UserRepository;
+import com.practice.QLTV.Repository.projection.UserView;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -69,6 +70,10 @@ public class UserService {
         Role role = roleRepository.findByRoleName(request.getRoleName()).orElseThrow(() -> new RuntimeException("Role Not Found"));
         user.setUserRole(role);
         return userRepository.save(user);
+    }
+
+    public List<UserView> countuserborrow(LocalDate startDate, LocalDate endDate) {
+        return userRepository.countUserViewByDate(startDate, endDate);
     }
 
     public List<UserResponse> getalluser(int page, int size) {

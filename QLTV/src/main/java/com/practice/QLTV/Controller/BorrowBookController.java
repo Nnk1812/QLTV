@@ -2,15 +2,17 @@ package com.practice.QLTV.Controller;
 
 import com.practice.QLTV.DTO.Request.BorrowBookRequest;
 import com.practice.QLTV.DTO.Response.APIResponse;
-import com.practice.QLTV.DTO.Response.BorrowBookResponse;
 import com.practice.QLTV.Entity.BorrowBook;
+import com.practice.QLTV.Repository.projection.BorrowBookView;
 import com.practice.QLTV.Service.BorrowBookService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -42,4 +44,18 @@ public class BorrowBookController {
     String deleteBorrowBook (@PathVariable int id) {
         return borrowBookService.delete(id);
     }
+
+//    @GetMapping("/thongke")
+//    List<Borrow_thongke> thongke(@RequestParam("startdate") LocalDate startdate ,
+//                                 @RequestParam("enddte") LocalDate enddate)
+//    {
+//        return borrowBookService.thongke(startdate,enddate);
+//    }
+
+    @GetMapping("/count")
+    List<BorrowBookView> countBorrowBook(@RequestParam("startdate")LocalDate startdate,
+                                   @RequestParam("enddate")LocalDate enddate ) {
+        return borrowBookService.countborrow(startdate,enddate);
+    }
+
 }

@@ -4,6 +4,7 @@ import com.practice.QLTV.DTO.Request.UserRequest;
 import com.practice.QLTV.DTO.Response.APIResponse;
 import com.practice.QLTV.DTO.Response.UserResponse;
 import com.practice.QLTV.Entity.User;
+import com.practice.QLTV.Repository.projection.UserView;
 import com.practice.QLTV.Service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -51,6 +53,11 @@ public class UserController {
     @GetMapping("/myinfo")
     User getmyinfo(){
         return userService.myinfo();
+    }
+    @GetMapping("/count")
+    List<UserView> countuserborrow(@RequestParam("startdate")LocalDate startdate,
+                                   @RequestParam("enddate")LocalDate enddate){
+        return userService.countuserborrow(startdate,enddate);
     }
 
     @PutMapping("/{id}")

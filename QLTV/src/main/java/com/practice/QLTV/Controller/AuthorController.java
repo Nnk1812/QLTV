@@ -3,6 +3,7 @@ package com.practice.QLTV.Controller;
 import com.practice.QLTV.DTO.Request.AuthorRequest;
 import com.practice.QLTV.DTO.Response.APIResponse;
 import com.practice.QLTV.Entity.Author;
+import com.practice.QLTV.Repository.projection.AuthorOverView;
 import com.practice.QLTV.Service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,5 +30,10 @@ public class AuthorController {
     @GetMapping
     List<Author> getall(){
         return authorService.getall();
+    }
+
+    @GetMapping("/overview/{id}")
+    AuthorOverView getoverview(@PathVariable int id){
+        return authorService.getauthor(id);
     }
 }
