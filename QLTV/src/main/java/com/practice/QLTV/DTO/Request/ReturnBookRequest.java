@@ -24,7 +24,7 @@ public class ReturnBookRequest {
     private Integer userId;
 
     @NotNull(message = "Return date is required")
-    private LocalDate doTra; // Return date
+    private LocalDate doTra = LocalDate.now(); // Return date
 
     private String note; // Note (optional)
 }

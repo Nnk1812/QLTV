@@ -49,6 +49,7 @@ public class BorrowBookService {
         Book book = bookRepository.findById(request.getBookID()).orElseThrow(
                 () -> new RuntimeException("Book not found")
         );
+        book.setAmount(book.getAmount()-1);
         borrowBook.setBook(book);
 
         User user = userRepository.findById(request.getUserID()).orElseThrow(
@@ -82,8 +83,11 @@ public class BorrowBookService {
         return (borrowRepository.save(book));
     }
     public String delete(int id) {
-        BorrowBook book = borrowRepository.findByMaMuon(id).orElseThrow(()->new RuntimeException("Book not found"));
-        borrowRepository.delete(book);
+        BorrowBook borrowBook = borrowRepository.findByMaMuon(id).orElseThrow(()->new RuntimeException("Book not found"));
+        Book book = borrowBook.getBook();
+        book.setAmount(book.getAmount()+1);
+        bookRepository.save(book);
+        borrowRepository.delete(borrowBook);
         return "Book deleted";
     }
 

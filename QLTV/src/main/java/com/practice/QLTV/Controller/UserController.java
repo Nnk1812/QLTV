@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    UserResponse updateuser(@PathVariable int id, @RequestBody @Valid UserRequest request){
+    User updateuser(@PathVariable int id, @RequestBody @Valid UserRequest request){
         return userService.updateuser(id,request);
     }
     @DeleteMapping("/{id}")

@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,7 +20,7 @@ public class BookRequest {
     private String name;
 
     @NotNull(message = "Genre ID is required")
-    private Integer genreID;
+    private List<Integer> genreID;
 
     @NotNull(message = "Author ID is required")
     private Integer authorId;

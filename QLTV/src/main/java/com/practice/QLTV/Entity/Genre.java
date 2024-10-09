@@ -24,7 +24,7 @@ public class Genre {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "genre")
+    @ManyToMany(mappedBy = "genres")
     @JsonIgnore
     private List<Book> books;
 }

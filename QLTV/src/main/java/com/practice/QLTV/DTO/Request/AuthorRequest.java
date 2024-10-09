@@ -29,5 +29,5 @@ public class AuthorRequest {
     private String email;
 
     @NotNull(message = "Date of birth is required")
-    private LocalDate dob; // Date of birth
+    private LocalDate dob = LocalDate.now(); // Date of birth
 }

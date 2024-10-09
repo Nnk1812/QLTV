@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class BookResponse {
     private Integer bookID;
     private String name;
-    private GenreResponse genreID;
-    private AuthorResponse authorID;
-    private PublisherResponse publisherID;
+    private Integer genreID;
+    private Integer authorID;
+    private Integer publisherID;
     private int amount;
 }

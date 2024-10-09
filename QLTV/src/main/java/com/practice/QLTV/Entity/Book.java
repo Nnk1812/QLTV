@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "Book")
@@ -23,18 +25,19 @@ public class Book {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "genreID", nullable = false)
-    private Genre genre;
+    @ManyToMany
+    @JoinTable(
+            name = "book_genre",  // Tên bảng trung gian là "book_genre"
+            joinColumns = @JoinColumn(name = "bookID"),  // Cột khóa ngoại liên kết với Book
+            inverseJoinColumns = @JoinColumn(name = "genreID")  // Cột khóa ngoại liên kết với Genre
+    )
+    private List<Genre> genres;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "authorID", nullable = false)
     private Author author;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "publisherID", nullable = false)
     private Publisher publisher;
 

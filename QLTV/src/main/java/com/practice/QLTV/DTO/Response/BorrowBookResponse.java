@@ -14,8 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class BorrowBookResponse {
     private int maMuon;
-    private BookResponse bookId;
-    private UserResponse userId;
+    private Integer bookId;
+    private Integer userId;
     private LocalDate doMuon;
     private String SDT;
     private String CCCD;

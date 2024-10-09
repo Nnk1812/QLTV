@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +29,6 @@ public class Publisher {
     private String SDT; // Phone number
 
     @OneToMany(mappedBy = "publisher")
+    @JsonIgnore
     private List<Book> books;
 }

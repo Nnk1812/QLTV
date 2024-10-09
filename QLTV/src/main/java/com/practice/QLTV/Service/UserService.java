@@ -76,6 +76,7 @@ public class UserService {
         return userRepository.countUserViewByDate(startDate, endDate);
     }
 
+
     public List<UserResponse> getalluser(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = userRepository.findAll(pageable);
@@ -110,14 +111,14 @@ public class UserService {
         User user = userRepository.findByUserName(name).orElseThrow(() -> new RuntimeException("User Not Found"));
         return user;
     }
-    public UserResponse updateuser(int id, UserRequest request) {
+    public User updateuser(int id, UserRequest request) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
         userMapper.updateUser(user, request);
         Role role = roleRepository.findByRoleName(request.getRoleName()).orElseThrow(() -> new RuntimeException("Role Not Found"));
         user.setUserRole(role);
-        return toResponse(userRepository.save(user));
+        return (userRepository.save(user));
     }
-    @PreAuthorize("hasRole('ROLE_Admin')")
+
     public String deleteuser(int id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
         userRepository.delete(user);

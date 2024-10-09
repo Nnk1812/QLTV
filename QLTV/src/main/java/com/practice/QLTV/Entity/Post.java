@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,9 +23,12 @@ public class Post {
     private Integer postId;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "userID", nullable = false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "bookID", nullable = false)
+    private Book book;
 
     @Column(nullable = false)
     private String title;
@@ -33,7 +37,7 @@ public class Post {
     private String content;
 
     @Column(nullable = false)
-    private LocalDateTime dop;
+    private LocalDate dop;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;

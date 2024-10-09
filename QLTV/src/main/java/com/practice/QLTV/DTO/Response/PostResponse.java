@@ -14,7 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class PostResponse {
     private int postId;
-    private UserResponse userID;
+    private Integer userID;
+    private Integer bookID;
     private String title;
     private String content;
     private LocalDate dop; // Ngày tạo bài viết

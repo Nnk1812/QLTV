@@ -17,6 +17,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -56,7 +57,7 @@ public class AuthenticationService {
                 .subject(user.getUserName())
                 .issuer("bean.com")
                 .issueTime(new Date())
-                .claim("Role",buildScope(user))
+                .claim("roles",buildRoles(user))
                 .expirationTime( new Date(
                         Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()
                 ) )
@@ -72,10 +73,10 @@ public class AuthenticationService {
             throw new RuntimeException(e);
         }
     }
-    private String buildScope(User user) {
+    private String buildRoles(User user) {
         StringJoiner stringJoiner = new StringJoiner(" ");
         if (user.getUserRole() != null) {
-            stringJoiner.add(user.getUserRole().getRoleName());
+            stringJoiner.add("ROLE_" + user.getUserRole().getRoleName());
         }
         return stringJoiner.toString();
     }

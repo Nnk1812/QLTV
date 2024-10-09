@@ -30,8 +30,8 @@ public class UserRequest {
     @Pattern(regexp = "^(\\d{10}|\\d{11})$", message = "Phone number must be 10 or 11 digits")
     private String SDT; // Phone number
 
-    @NotBlank(message = "date of birth is mandatory")
-    private LocalDate dob;
+
+    private LocalDate dob = LocalDate.now();
 
     @NotBlank(message = "Address is mandatory")
     private String address;

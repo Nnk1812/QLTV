@@ -27,7 +27,6 @@ public class Comment {
     private Post post;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
 

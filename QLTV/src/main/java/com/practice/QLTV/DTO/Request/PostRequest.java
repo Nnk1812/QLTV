@@ -18,10 +18,13 @@ public class PostRequest {
     private Integer userID;
 
     @NotBlank(message = "Title is required")
+    private Integer bookID;
+
+    @NotBlank(message = "Title is required")
     private String title;
 
     @NotBlank(message = "Date of post is required")
-    private LocalDate dop;
+    private LocalDate dop = LocalDate.now();
 
     @NotBlank(message = "Content is required")
     private String content;

@@ -21,8 +21,8 @@ public class BookController {
     @Autowired
     private BookService bookService;
     @PostMapping
-    APIResponse<BookRequest> createbook(@RequestBody @Valid BookRequest request) {
-        APIResponse<BookRequest> apiResponse = new APIResponse<>();
+    APIResponse<Book> createbook(@RequestBody @Valid BookRequest request) {
+        APIResponse<Book> apiResponse = new APIResponse<>();
         apiResponse.setData(bookService.createBook(request));
         return apiResponse;
     }

@@ -2,6 +2,7 @@ package com.practice.QLTV.Service;
 
 import com.practice.QLTV.DTO.Request.ReturnBookRequest;
 import com.practice.QLTV.DTO.Response.*;
+import com.practice.QLTV.Entity.Book;
 import com.practice.QLTV.Entity.BorrowBook;
 import com.practice.QLTV.Entity.ReturnBook;
 import com.practice.QLTV.Entity.User;
@@ -34,6 +35,8 @@ public class ReturnBookService {
         BorrowBook borrow = borrowRepository.findByMaMuon(request.getBorrowID()).orElseThrow(
                 ()->new RuntimeException("ma muon not found")
         );
+        Book book = borrow.getBook();
+        book.setAmount(book.getAmount()+1);
         returnBook.setBorrow(borrow);
         User user = userRepository.findById(request.getUserId()).orElseThrow(
                 ()->new RuntimeException("user not found")
@@ -75,6 +78,8 @@ public class ReturnBookService {
     }
     public String deleteReturnBook(int id) {
         ReturnBook returnBook = repo.findBymaTra(id).orElseThrow(()-> new RuntimeException("ReturnBook not found"));
+        Book book = returnBook.getBorrow().getBook();
+        book.setAmount(book.getAmount()-1);
         repo.delete(returnBook);
         return "ReturnBook deleted";
     }

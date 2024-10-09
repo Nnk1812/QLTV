@@ -14,8 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class ReturnBookResponse {
     private Integer maTra;
-    private BookResponse maBook;
-    private UserResponse userId;
+    private Integer maBook;
+    private Integer userId;
     private LocalDate doTra;
     private String note;
 }

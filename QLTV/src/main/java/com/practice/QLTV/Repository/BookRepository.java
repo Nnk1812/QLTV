@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-    List<Book> findByGenre(Genre genre);
     Optional<Book> findByBookID(int bookID);
 
 }

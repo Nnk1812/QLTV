@@ -1,5 +1,6 @@
 package com.practice.QLTV.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,5 +36,6 @@ public class Author {
     private LocalDate dob; // Date of birth
 
     @OneToMany(mappedBy = "author")
+    @JsonIgnore
     private List<Book> books;
 }

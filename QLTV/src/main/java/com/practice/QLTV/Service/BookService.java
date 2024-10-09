@@ -39,9 +39,11 @@ public class BookService {
 
         book.setName(request.getName());
 
-        Genre genre = genreRepository.findByGenreID(request.getGenreID()).orElseThrow(
-                ()->new RuntimeException("genre not exists"));
-        book.setGenre(genre);
+         List<Genre> genres = request.getGenreID().stream()
+                 .map(genreId -> genreRepository.findById(genreId)
+                         .orElseThrow(() -> new RuntimeException("Genre not found: " + genreId)))
+                 .collect(Collectors.toList());
+         book.setGenres(genres);
 
         Author author = authorRepository.findByAuthorID(request.getAuthorId()).orElseThrow(
                 ()->new RuntimeException("author not exists"));
@@ -58,9 +60,11 @@ public class BookService {
     private void updateBook(Book book, BookRequest request) {
         book.setName(request.getName());
 
-        Genre genre = genreRepository.findById(request.getGenreID())
-                .orElseThrow(() -> new RuntimeException("Genre not found"));
-        book.setGenre(genre);
+        List<Genre> genres = request.getGenreID().stream()
+                .map(genreId -> genreRepository.findById(genreId)
+                        .orElseThrow(() -> new RuntimeException("Genre not found: " + genreId)))
+                .collect(Collectors.toList());
+        book.setGenres(genres);
 
         Author author = authorRepository.findById(request.getAuthorId())
                 .orElseThrow(() -> new RuntimeException("Author not found"));
@@ -72,10 +76,9 @@ public class BookService {
 
         book.setAmount(request.getAmount());
     }
-    public BookRequest createBook(BookRequest request) {
+    public Book createBook(BookRequest request) {
         Book book = toBook(request);
-        bookRepository.save(book);
-        return request;
+        return bookRepository.save(book);
     }
     public Book updateBook(BookRequest request, Integer id) {
         Book book = bookRepository.findByBookID(id).orElseThrow(()-> new RuntimeException("Book not found"));

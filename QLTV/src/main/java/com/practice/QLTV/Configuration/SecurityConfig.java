@@ -37,9 +37,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(HttpMethod.POST, End_point_post).permitAll()
                         .requestMatchers(HttpMethod.GET, End_point_get).permitAll()
-                        .requestMatchers(HttpMethod.PUT,"/user").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/user").hasRole("Admin")
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/cmt").hasRole("Admin")
                         .anyRequest().authenticated() // All other requests require authentication
                 )
 
@@ -48,7 +47,6 @@ public class SecurityConfig {
         httpSecurity.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtdeCoder())
                         .jwtAuthenticationConverter(jwtAuthenticationConverter())));
-
         return httpSecurity.build();
     }
     @Bean
